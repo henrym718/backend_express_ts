@@ -1,0 +1,73 @@
+services:
+    server:
+        build: .
+        container_name: server
+        environment:
+            DB_PORT: 5432
+            DB_USERNAME: henry
+            DB_PASSWORD: 12345
+            DB_DATABASE: dbtest
+            DB_HOST: postgres
+            PORT: 3000
+        ports:
+            - 3000:3000
+        networks:
+            - lan
+        volumes:
+            - ./src:/app/src
+        depends_on:
+            - postgres
+
+    postgres:
+        image: postgres
+        container_name: postgres
+        environment:
+            POSTGRES_USER: henry
+            POSTGRES_PASSWORD: 12345
+            POSTGRES_DB: dbtest
+        ports:
+            - 5432:5432
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        networks:
+            - lan
+
+volumes:
+    postgres_data:
+
+networks:
+    lan:
+# services:
+#     backend:
+#         build: .
+#         container_name: backend
+#         ports:
+#             - 4000:4000
+#         volumes:
+#             - ./src:/app/src
+#         environment:
+#             - DATABASE_URL=postgres://henry:12345@postgres:5432/dbtest
+#         networks:
+#             - lan_proyect
+#         depends_on:
+#             - postgres
+
+#     postgres:
+#         image: postgres:latest
+#         container_name: postgres
+#         environment:
+#             - POSTGRES_USER=henry
+#             - POSTGRES_PASSWORD=12345
+#             - POSTGRES_DB=dbtest
+#         volumes:
+#             - postgres_data:/var/lib/postgresql/data
+#         networks:
+#             - lan_proyect
+#         ports:
+#             - 5432:5432
+
+# volumes:
+#     postgres_data:
+
+# networks:
+#     lan_proyect:
