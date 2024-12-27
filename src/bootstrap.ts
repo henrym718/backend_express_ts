@@ -1,28 +1,26 @@
-import { app } from "./app";
 import { DataBaseBootstrap } from "./bootstrap/database.bootstrap";
 import { EnvironmentBootstrap } from "./bootstrap/env.bootstrap";
 import { ServerBootstrap } from "./bootstrap/server.bootstrap";
-import { EnvConfig } from "./config/env.schema";
-import { logguer } from "./helpers/logguer";
+import { logguer } from "./config/logguer";
 
-export let ENV: Readonly<EnvConfig>;
+const environmenBootstrap = new EnvironmentBootstrap();
+const dataBaseBootstrap = new DataBaseBootstrap();
+const serverBootstrap = new ServerBootstrap();
+
 (async () => {
     try {
         // 1. Inicializar variables de entorno
-        const envBootstrap = EnvironmentBootstrap.getInstance();
-        await envBootstrap.initialize();
-        ENV = envBootstrap.getEnv();
+        await environmenBootstrap.initialize();
 
         // 2. Inicializar base de datos
-        const dbBootstrap = DataBaseBootstrap.getInstance();
-        await dbBootstrap.initialize();
+        await dataBaseBootstrap.initialize();
 
         // 3. Inicializar servidor
-        const serverBootstrap = ServerBootstrap.getInstance();
         await serverBootstrap.initialize();
     } catch (error) {
+        await dataBaseBootstrap.close();
+        await serverBootstrap.close();
         logguer.error(error);
-        DataBaseBootstrap.getInstance().close();
         process.exit(1);
     }
 })();

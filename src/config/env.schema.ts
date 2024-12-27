@@ -12,7 +12,7 @@ export const envSchema = z.object({
     DB_USERNAME: z.string().min(1),
     DB_PASSWORD: z.string().min(1),
     DB_DATABASE: z.string().min(1),
-    DB_ENTITIES: z.string().default("src/**/infrastructure/**/*.entity.ts"),
+    DB_ENTITIES: z.string().default("src/**/infraestructure/**/*.entity.ts"),
     DB_POOL_SIZE: z.string().transform(Number).default("10"),
     DB_MAX_QUERY_EXECUTION_TIME: z.string().transform(Number).default("10000"),
 

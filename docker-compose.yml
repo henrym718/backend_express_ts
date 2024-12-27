@@ -1,22 +1,22 @@
 services:
-    server:
-        build: .
-        container_name: server
-        environment:
-            DB_PORT: 5432
-            DB_USERNAME: henry
-            DB_PASSWORD: 12345
-            DB_DATABASE: dbtest
-            DB_HOST: postgres
-            PORT: 3000
-        ports:
-            - 3000:3000
-        networks:
-            - lan
-        volumes:
-            - ./src:/app/src
-        depends_on:
-            - postgres
+    # server:
+    #     build: .
+    #     container_name: server
+    #     environment:
+    #         DB_PORT: 5432
+    #         DB_USERNAME: henry
+    #         DB_PASSWORD: 12345
+    #         DB_DATABASE: dbtest
+    #         DB_HOST: postgres
+    #         PORT: 8000
+    #     ports:
+    #         - 8000:8000
+    #     networks:
+    #         - lan
+    #     volumes:
+    #         - ./src:/app/src
+    #     depends_on:
+    #         - postgres
 
     postgres:
         image: postgres
@@ -29,14 +29,13 @@ services:
             - 5432:5432
         volumes:
             - postgres_data:/var/lib/postgresql/data
-        networks:
-            - lan
+        # networks:
+        #     - lan
 
 volumes:
     postgres_data:
-
-networks:
-    lan:
+# networks:
+#     lan:
 # services:
 #     backend:
 #         build: .
