@@ -5,12 +5,12 @@
         "rootDir": "./src",
         "baseUrl": "./src",
         "paths": {
-            "@User/*": ["features/user/*"],
-            "@Role/*": ["features/role/*"],
-            "@Auth/*": ["features/auth/*"],
-
+            "@User/*": ["modules/user/*"],
+            "@Role/*": ["modules/role/*"],
+            "@Auth/*": ["modules/auth/*"],
             "@Bootstrap/*": ["bootstrap/*"],
-            "@Config/*": ["config/*"]
+            "@Config/*": ["config/*"],
+            "@Shared/*": ["shared/*"]
         },
         "outDir": "cache/",
         "esModuleInterop": true,
